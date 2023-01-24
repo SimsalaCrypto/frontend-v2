@@ -1,19 +1,19 @@
 import vue from '@vitejs/plugin-vue';
-import { resolve, dirname } from 'path';
+import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 // import AutoImport from 'unplugin-auto-import/vite'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+import analyze from 'rollup-plugin-analyzer';
+import rollupPolyfillNode from 'rollup-plugin-polyfill-node';
+import { visualizer } from 'rollup-plugin-visualizer';
 import Components from 'unplugin-vue-components/vite';
 import { loadEnv } from 'vite';
-import { defineConfig } from 'vitest/config';
-import { version as pkgVersion } from './package.json';
-import nodePolyfills from 'vite-plugin-node-stdlib-browser';
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import rollupPolyfillNode from 'rollup-plugin-polyfill-node';
+import nodePolyfills from 'vite-plugin-node-stdlib-browser';
 import type { ViteSentryPluginOptions } from 'vite-plugin-sentry';
 import viteSentry from 'vite-plugin-sentry';
-import analyze from 'rollup-plugin-analyzer';
-import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig } from 'vitest/config';
+import { version as pkgVersion } from './package.json';
 
 export default defineConfig(({ mode }) => {
   const envConfig = loadEnv(mode, process.cwd());
@@ -115,6 +115,7 @@ export default defineConfig(({ mode }) => {
       strictPort: true,
     },
     build: {
+      target: 'esnext',
       sourcemap: true,
       minify: true,
       rollupOptions: {
