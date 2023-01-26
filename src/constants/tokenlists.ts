@@ -14,6 +14,25 @@ interface TokenListMapByNetwork {
  * Mapping of the TokenLists used on each network
  */
 export const TOKEN_LIST_MAP: TokenListMapByNetwork = {
+  // TODO: UPDATE KLAYTN AND BAOBAB VALUES
+  '8217': {
+    Balancer: {
+      Default:
+        'https://raw.githubusercontent.com/SimsalaCrypto/frontend-v2/develop/public/data/baobab.tokenlist.json',
+      Vetted:
+        'https://raw.githubusercontent.com/SimsalaCrypto/frontend-v2/develop/public/data/baobab.tokenlist.json',
+    },
+    External: [],
+  },
+  '1001': {
+    Balancer: {
+      Default:
+        'https://raw.githubusercontent.com/SimsalaCrypto/frontend-v2/develop/public/data/baobab.tokenlist.json',
+      Vetted:
+        'https://raw.githubusercontent.com/SimsalaCrypto/frontend-v2/develop/public/data/baobab.tokenlist.json',
+    },
+    External: [],
+  },
   '1': {
     Balancer: {
       Default:

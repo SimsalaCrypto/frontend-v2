@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { GasPrice } from './types';
+import { Network } from '@/constants/network';
 import { bnum } from '@/lib/utils';
 import { configService } from '@/services/config/config.service';
-import { Network } from '@balancer-labs/sdk';
+import axios from 'axios';
+import { GasPrice } from './types';
 
 interface ArbitrumGasStationResponse {
   id: number;

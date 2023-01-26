@@ -1,9 +1,9 @@
-import { Network } from '@balancer-labs/sdk';
-import { BigNumber } from '@ethersproject/bignumber';
+import { Network } from '@/constants/network';
 import {
   GPv2Settlement,
   GPv2VaultRelayer,
 } from '@cowprotocol/contracts/networks.json';
+import { BigNumber } from '@ethersproject/bignumber';
 
 import { networkId } from '@/composables/useNetwork';
 

@@ -1,4 +1,4 @@
-import { Network } from '@balancer-labs/sdk';
+import { Network } from '@/constants/network';
 
 import { isMainnet, networkId } from '@/composables/useNetwork';
 
@@ -488,6 +488,102 @@ const POOLS_POLYGON: Pools = {
   ],
 };
 
+// TODO: UPDATE POOLS FOR KLAYTN AND BAOBAB
+const POOLS_BAOBAB: Pools = {
+  IdsMap: {
+    // xMatic: {
+    //   v1: '0xc17636e36398602dd37bb5d1b3a9008c7629005f0002000000000000000004c4',
+    //   v2: '0xb20fc01d21a50d2c734c4a1262b4404d41fa7bf000000000000000000000075c',
+    // },
+    // stMatic: {
+    //   v1: '0xaf5e0b5425de1f5a630a8cb5aa9d97b8141c908d000200000000000000000366',
+    //   v2: '0x8159462d255c1d24915cb51ec361f700174cd99400000000000000000000075d',
+    // },
+    // mai4: {
+    //   mai4: '0x06df3b2bbb68adc8b0e302443692037ed9f91b42000000000000000000000012',
+    //   maiBbaUsd: '0xb54b2125b711cd183edd3dd09433439d5396165200000000000000000000075e',
+    // },
+  },
+  Pagination: {
+    PerPage: 10,
+    PerPool: 10,
+    PerPoolInitial: 5,
+  },
+  DelegateOwner: '0xba1ba1ba1ba1ba1ba1ba1ba1ba1ba1ba1ba1ba1b',
+  ZeroAddress: '0x0000000000000000000000000000000000000000',
+  DynamicFees: {
+    Gauntlet: [],
+  },
+  BlockList: [''],
+  ExcludedPoolTypes: [],
+  Stable: {
+    AllowList: [],
+  },
+  Investment: {
+    AllowList: [],
+  },
+  Factories: {
+    '0xC9C58BD6c6c1CAc12F8A174670BEC9e4C0924181': 'weightedPool', // weighted pool v2
+  },
+  Stakable: {
+    AllowList: [],
+  },
+  Metadata: {
+    '0x48e6b98ef6329f8f0a30ebb8c7c960330d64808500000000000000000000075b': {
+      name: 'Balancer Boosted Aave USD (Polygon)',
+      hasIcon: true,
+    },
+  },
+  DisabledJoins: [],
+};
+const POOLS_KLAYTN: Pools = {
+  IdsMap: {
+    // xMatic: {
+    //   v1: '0xc17636e36398602dd37bb5d1b3a9008c7629005f0002000000000000000004c4',
+    //   v2: '0xb20fc01d21a50d2c734c4a1262b4404d41fa7bf000000000000000000000075c',
+    // },
+    // stMatic: {
+    //   v1: '0xaf5e0b5425de1f5a630a8cb5aa9d97b8141c908d000200000000000000000366',
+    //   v2: '0x8159462d255c1d24915cb51ec361f700174cd99400000000000000000000075d',
+    // },
+    // mai4: {
+    //   mai4: '0x06df3b2bbb68adc8b0e302443692037ed9f91b42000000000000000000000012',
+    //   maiBbaUsd: '0xb54b2125b711cd183edd3dd09433439d5396165200000000000000000000075e',
+    // },
+  },
+  Pagination: {
+    PerPage: 10,
+    PerPool: 10,
+    PerPoolInitial: 5,
+  },
+  DelegateOwner: '0xba1ba1ba1ba1ba1ba1ba1ba1ba1ba1ba1ba1ba1b',
+  ZeroAddress: '0x0000000000000000000000000000000000000000',
+  DynamicFees: {
+    Gauntlet: [],
+  },
+  BlockList: [''],
+  ExcludedPoolTypes: [],
+  Stable: {
+    AllowList: [],
+  },
+  Investment: {
+    AllowList: [],
+  },
+  Factories: {
+    '0xC9C58BD6c6c1CAc12F8A174670BEC9e4C0924181': 'weightedPool', // weighted pool v2
+  },
+  Stakable: {
+    AllowList: [],
+  },
+  Metadata: {
+    '0x48e6b98ef6329f8f0a30ebb8c7c960330d64808500000000000000000000075b': {
+      name: 'Balancer Boosted Aave USD (Polygon)',
+      hasIcon: true,
+    },
+  },
+  DisabledJoins: [],
+};
+
 const POOLS_ARBITRUM: Pools = {
   IdsMap: {},
   Pagination: {
@@ -668,6 +764,8 @@ const POOLS_MAP = {
   [Network.MAINNET]: POOLS_MAINNET,
   [Network.POLYGON]: POOLS_POLYGON,
   [Network.ARBITRUM]: POOLS_ARBITRUM,
+  [Network.BAOBAB]: POOLS_BAOBAB,
+  [Network.KLAYTN]: POOLS_KLAYTN,
 };
 
 export const POOLS: Pools = POOLS_MAP[networkId.value]

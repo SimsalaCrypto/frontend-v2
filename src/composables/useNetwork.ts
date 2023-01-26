@@ -1,8 +1,8 @@
 import { computed, ref } from 'vue';
 
+import { Network } from '@/constants/network';
 import config from '@/lib/config';
 import { configService } from '@/services/config/config.service';
-import { Network } from '@balancer-labs/sdk';
 import { RouteParamsRaw } from 'vue-router';
 
 /**
@@ -28,6 +28,8 @@ if (windowAvailable) localStorage.setItem('networkId', NETWORK_ID.toString());
 export const networkSlug = config[NETWORK_ID].slug;
 export const networkConfig = config[NETWORK_ID];
 export const networkLabelMap = {
+  [Network.KLAYTN]: 'Klaytn',
+  [Network.BAOBAB]: 'Baobab',
   [Network.MAINNET]: 'Ethereum',
   [Network.POLYGON]: 'Polygon',
   [Network.ARBITRUM]: 'Arbitrum',
@@ -45,6 +47,8 @@ export const isMainnet = computed(() => networkId.value === Network.MAINNET);
 export const isPolygon = computed(() => networkId.value === Network.POLYGON);
 export const isArbitrum = computed(() => networkId.value === Network.ARBITRUM);
 export const isGoerli = computed(() => networkId.value === Network.GOERLI);
+export const isKlaytn = computed(() => networkId.value === Network.KLAYTN);
+export const isBaobab = computed(() => networkId.value === Network.BAOBAB);
 
 export const isL2 = computed(() => isPolygon.value || isArbitrum.value);
 export const isTestnet = computed(() => isGoerli.value);
@@ -55,6 +59,10 @@ export const isTestnet = computed(() => isGoerli.value);
 
 export function networkFor(key: string | number): Network {
   switch (key.toString()) {
+    case '8217':
+      return Network.KLAYTN;
+    case '1001':
+      return Network.BAOBAB;
     case '1':
       return Network.MAINNET;
     case '5':

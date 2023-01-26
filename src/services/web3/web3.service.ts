@@ -1,4 +1,4 @@
-import { Network } from '@balancer-labs/sdk';
+import { Network } from '@/constants/network';
 import {
   JsonRpcProvider,
   JsonRpcSigner,
@@ -9,8 +9,8 @@ import { ComputedRef } from 'vue';
 
 import ConfigService, { configService } from '@/services/config/config.service';
 import {
-  rpcProviderService as _rpcProviderService,
   rpcProviderService,
+  rpcProviderService as _rpcProviderService,
 } from '../rpc-provider/rpc-provider.service';
 import { TransactionBuilder } from './transactions/transaction.builder';
 

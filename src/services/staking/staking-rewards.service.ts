@@ -1,7 +1,7 @@
-import { Network } from '@balancer-labs/sdk';
-import { getUnixTime } from 'date-fns';
+import { Network } from '@/constants/network';
 import { getAddress } from '@ethersproject/address';
 import { formatUnits } from '@ethersproject/units';
+import { getUnixTime } from 'date-fns';
 import { isNil, mapValues } from 'lodash';
 
 import { isL2 } from '@/composables/useNetwork';

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import i18n from '@/plugins/i18n';
@@ -7,10 +7,10 @@ import i18n from '@/plugins/i18n';
 import useBreakpoints from '@/composables/useBreakpoints';
 import useNetwork from '@/composables/useNetwork';
 import useNotifications from '@/composables/useNotifications';
-import useWeb3 from '@/services/web3/useWeb3';
-import { configService } from '@/services/config/config.service';
 import { buildNetworkIconURL } from '@/lib/utils/urls';
 import { hardRedirectTo } from '@/plugins/router/nav-guards';
+import { configService } from '@/services/config/config.service';
+import useWeb3 from '@/services/web3/useWeb3';
 
 export interface NetworkOption {
   id: string;
@@ -28,6 +28,12 @@ const router = useRouter();
 const { addNotification } = useNotifications();
 
 const networks = ref([
+  {
+    id: 'klaytn',
+    name: 'Klaytn',
+    networkSlug: 'klaytn',
+    key: '8217',
+  },
   {
     id: 'ethereum',
     name: 'Ethereum',
@@ -54,6 +60,12 @@ const networksDev = ref([
     name: 'Goerli',
     networkSlug: 'goerli',
     key: '5',
+  },
+  {
+    id: 'baobab',
+    name: 'Baobab',
+    networkSlug: 'baobab',
+    key: '1001',
   },
 ]);
 

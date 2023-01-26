@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import {
   getRedirectUrlFor,
   handleNetworkSlug,
@@ -6,8 +5,9 @@ import {
   networkSlug,
 } from '@/composables/useNetwork';
 import { isJoinsDisabled } from '@/composables/usePool';
+import { Network } from '@/constants/network';
 import config from '@/lib/config';
-import { Network } from '@balancer-labs/sdk';
+import { ref } from 'vue';
 import { Router } from 'vue-router';
 
 /**

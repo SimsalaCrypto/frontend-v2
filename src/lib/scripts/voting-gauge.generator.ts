@@ -1,4 +1,4 @@
-import { Network } from '@balancer-labs/sdk';
+import { Network } from '@/constants/network';
 import { getAddress } from '@ethersproject/address';
 import debug from 'debug';
 import fs from 'fs';
@@ -8,17 +8,17 @@ import path from 'path';
 import { TOKEN_LIST_MAP } from '@/constants/tokenlists';
 import { POOLS } from '@/constants/voting-gauge-pools';
 import { VotingGauge } from '@/constants/voting-gauges';
-import { getPlatformId } from '@/services/coingecko/coingecko.service';
 import VEBalHelpersABI from '@/lib/abi/VEBalHelpers.json';
-import vebalGauge from '../../../public/data/vebal-gauge.json';
+import { getPlatformId } from '@/services/coingecko/coingecko.service';
+import { JsonRpcProvider } from '@ethersproject/providers';
+import { formatUnits } from '@ethersproject/units';
+import { mapValues } from 'lodash';
 import hardcodedGauges from '../../../public/data/hardcoded-gauges.json';
+import vebalGauge from '../../../public/data/vebal-gauge.json';
 import config from '../config';
 import { isSameAddress } from '../utils';
 import { Multicaller } from '../utils/balancer/contract';
-import { formatUnits } from '@ethersproject/units';
-import { JsonRpcProvider } from '@ethersproject/providers';
 import template from '../utils/template';
-import { mapValues } from 'lodash';
 
 require('dotenv').config({
   path: path.resolve(__dirname, '../../../.env.development'),
