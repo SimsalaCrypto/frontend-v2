@@ -12,12 +12,12 @@
   "publicRpc": "https://public-node-api.klaytnapi.com/v1/cypress",
   "explorer": "https://scope.klaytn.com",
   "explorerName": "Klaytnscope",
-  "subgraph": "http://54.83.71.172:8000/subgraphs/name/balancer-labs/balancer-v2/",
+  "subgraph": "http://159.89.228.217:8000/subgraphs/name/balancer-labs/balancer-v2",
   "balancerApi": "https://api.balancer.fi",
   "poolsUrlV2": "",
   "subgraphs": {
     "main": [
-      "http://54.83.71.172:8000/subgraphs/name/balancer-labs/balancer-v2/ "
+      "http://159.89.228.217:8000/subgraphs/name/balancer-labs/balancer-v2 "
     ],
     "aave": "https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic",
     "gauge": "https://api.thegraph.com/subgraphs/name/balancer-labs/balancer-gauges-polygon",
