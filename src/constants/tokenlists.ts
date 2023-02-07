@@ -22,7 +22,9 @@ export const TOKEN_LIST_MAP: TokenListMapByNetwork = {
       Vetted:
         'https://raw.githubusercontent.com/SimsalaCrypto/frontend-v2/develop/public/data/baobab.tokenlist.json',
     },
-    External: [],
+    External: [
+      'https://raw.githubusercontent.com/SimsalaCrypto/frontend-v2/develop/public/data/baobab.tokenlist.json',
+    ],
   },
   '1001': {
     Balancer: {
@@ -31,7 +33,9 @@ export const TOKEN_LIST_MAP: TokenListMapByNetwork = {
       Vetted:
         'https://raw.githubusercontent.com/SimsalaCrypto/frontend-v2/develop/public/data/baobab.tokenlist.json',
     },
-    External: [],
+    External: [
+      'https://raw.githubusercontent.com/SimsalaCrypto/frontend-v2/develop/public/data/baobab.tokenlist.json',
+    ],
   },
   '1': {
     Balancer: {

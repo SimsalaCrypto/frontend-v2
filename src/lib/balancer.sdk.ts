@@ -1,10 +1,15 @@
-import { BalancerSDK, Network } from '@balancer-labs/sdk';
-import { configService } from '@/services/config/config.service';
-import { ref } from 'vue';
+// import { Network } from '@/constants/network';
 import { isTestMode } from '@/plugins/modes';
+import { configService } from '@/services/config/config.service';
+import { BalancerSDK, Network } from '@balancer-labs/sdk';
+import { ref } from 'vue';
 
 const network = ((): Network => {
   switch (configService.network.key) {
+    case '8217':
+      return Network.KLAYTN;
+    case '1001':
+      return Network.BAOBAB;
     case '1':
       return Network.MAINNET;
     case '5':
@@ -14,7 +19,7 @@ const network = ((): Network => {
     case '42161':
       return Network.ARBITRUM;
     default:
-      return Network.MAINNET;
+      return Network.KLAYTN;
   }
 })();
 

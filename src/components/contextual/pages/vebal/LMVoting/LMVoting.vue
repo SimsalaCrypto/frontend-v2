@@ -3,20 +3,20 @@ import { computed, ref } from 'vue';
 
 import useExpiredGaugesQuery from '@/composables/queries/useExpiredGaugesQuery';
 import useVeBalLockInfoQuery from '@/composables/queries/useVeBalLockInfoQuery';
-import useVotingEscrowLocks from '@/composables/useVotingEscrowLocks';
 import useDebouncedRef from '@/composables/useDebouncedRed';
 import useNumbers, { FNumFormats } from '@/composables/useNumbers';
 import { poolURLFor } from '@/composables/usePool';
+import useVotingEscrowLocks from '@/composables/useVotingEscrowLocks';
 import useVotingGauges from '@/composables/useVotingGauges';
 import { bnum, isSameAddress, scale } from '@/lib/utils';
 import { VotingGaugeWithVotes } from '@/services/balancer/gauges/gauge-controller.decorator';
 
+import { orderedTokenURIs } from '@/composables/useVotingGauges';
+import { Network } from '@/constants/network';
+import GaugesFilters from './GaugesFilters.vue';
 import GaugesTable from './GaugesTable.vue';
 import GaugeVoteModal from './GaugeVoteModal.vue';
 import ResubmitVotesAlert from './ResubmitVotes/ResubmitVotesAlert.vue';
-import { orderedTokenURIs } from '@/composables/useVotingGauges';
-import { Network } from '@balancer-labs/sdk';
-import GaugesFilters from './GaugesFilters.vue';
 
 /**
  * DATA
@@ -31,6 +31,8 @@ const networkFilters = [
   Network.POLYGON,
   Network.ARBITRUM,
   Network.OPTIMISM,
+  Network.BAOBAB,
+  Network.KLAYTN,
 ];
 
 /**

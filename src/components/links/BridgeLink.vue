@@ -9,6 +9,8 @@ const { networkId } = useNetwork();
 
 const bridgeUrl = computed((): string => {
   switch (networkId.value) {
+    case Network.KLAYTN:
+      return 'https://scope.klaytn.com/bridge';
     case Network.POLYGON:
       return 'https://wallet.polygon.technology/polygon/bridge';
     case Network.ARBITRUM:

@@ -14,6 +14,8 @@ export enum PoolWarning {
 }
 
 const POOL_ISSUES = {
+  [Network.BAOBAB]: {},
+  [Network.KLAYTN]: {},
   [Network.GOERLI]: {},
   [Network.MAINNET]: {
     [PoolWarning.PoolProtocolFeeVulnWarning]: [

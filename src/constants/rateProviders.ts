@@ -2,6 +2,17 @@ import { networkId } from '@/composables/useNetwork';
 import { Network } from '@/constants/network';
 
 const ALLOWED_RATE_PROVIDERS_MAP = {
+  // TODO: ADD PROPER ADDRESSES FOR KLAYTN & BAOBAB
+  [Network.BAOBAB]: {
+    '*': {
+      '0x0000000000000000000000000000000000000000': true,
+    },
+  },
+  [Network.KLAYTN]: {
+    '*': {
+      '0x0000000000000000000000000000000000000000': true,
+    },
+  },
   [Network.MAINNET]: {
     '*': {
       '0x0000000000000000000000000000000000000000': true,
