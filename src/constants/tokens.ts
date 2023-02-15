@@ -110,7 +110,7 @@ export const TOKENS_GOERLI: TokenConstants = {
 
 export const TOKENS_BAOBAB: TokenConstants = {
   Popular: {
-    Symbols: ['WBTC', 'DAI', 'USDC', 'BAL', 'AAVE', 'WETH'],
+    Symbols: ['tUSDT', 'tKDAI', 'tUSDC', 'KLAY'],
   },
   Addresses: {
     nativeAsset: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',

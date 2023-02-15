@@ -502,7 +502,7 @@ const POOLS_BAOBAB: Pools = {
     Gauntlet: [],
   },
   BlockList: [''],
-  ExcludedPoolTypes: [],
+  ExcludedPoolTypes: [''],
   Stable: {
     AllowList: [
       '0xb5f97411fcf2598acb2d5da076e10b452843a5f2000100000000000000000006',

@@ -15,10 +15,10 @@ import {
   PoolsRepositoryFetchOptions,
   PoolRepository as SDKPoolRepository,
 } from '@balancer-labs/sdk';
-import { PoolDecorator } from '@/services/pool/decorators/pool.decorator';
-import { flatten } from 'lodash';
-import { forChange } from '@/lib/utils';
-import { tokenTreeLeafs } from '../usePool';
+// import { PoolDecorator } from '@/services/pool/decorators/pool.decorator';
+// import { flatten } from 'lodash';
+// import { forChange } from '@/lib/utils';
+// import { tokenTreeLeafs } from '../usePool';
 import { balancerSubgraphService } from '@/services/balancer/subgraph/balancer-subgraph.service';
 import { balancerAPIService } from '@/services/balancer/api/balancer-api.service';
 import { poolsStoreService } from '@/services/pool/pools-store.service';
@@ -44,7 +44,7 @@ export default function usePoolsQuery(
   /**
    * COMPOSABLES
    */
-  const { injectTokens, tokens: tokenMeta, dynamicDataLoading } = useTokens();
+  // const { injectTokens, tokens: tokenMeta, dynamicDataLoading } = useTokens();
   const { networkId } = useNetwork();
 
   let poolsRepository = initializePoolsRepository();
@@ -80,23 +80,25 @@ export default function usePoolsQuery(
         const pools = await balancerSubgraphService.pools.get(
           getQueryArgs(options)
         );
+        console.log('pools', pools);
+        // const poolDecorator = new PoolDecorator(pools);
+        // const decoratedPools = await poolDecorator.decorate(tokenMeta.value);
+        // console.log('decoratedPools', decoratedPools);
 
-        const poolDecorator = new PoolDecorator(pools);
-        let decoratedPools = await poolDecorator.decorate(tokenMeta.value);
+        // const tokens = flatten(
+        //   pools.map(pool => [
+        //     ...pool.tokensList,
+        //     ...tokenTreeLeafs(pool.tokens),
+        //     pool.address,
+        //   ])
+        // );
+        // await injectTokens(tokens);
+        // await forChange(dynamicDataLoading, false);
 
-        const tokens = flatten(
-          pools.map(pool => [
-            ...pool.tokensList,
-            ...tokenTreeLeafs(pool.tokens),
-            pool.address,
-          ])
-        );
-        await injectTokens(tokens);
-        await forChange(dynamicDataLoading, false);
+        // decoratedPools = await poolDecorator.reCalculateTotalLiquidities();
 
-        decoratedPools = await poolDecorator.reCalculateTotalLiquidities();
-
-        return decoratedPools;
+        // return decoratedPools;
+        return pools;
       },
       get skip(): number {
         return balancerSubgraphService.pools.skip;
