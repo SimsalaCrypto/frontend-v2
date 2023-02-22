@@ -19,7 +19,7 @@ const network = ((): Network => {
     case '42161':
       return Network.ARBITRUM;
     default:
-      return Network.KLAYTN;
+      return Network.BAOBAB;
   }
 })();
 

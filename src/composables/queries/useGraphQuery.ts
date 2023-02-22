@@ -33,7 +33,9 @@ export default function useGraphQuery<T>(
 
   const queryFn = async () => {
     if (!subgraphUrl) {
-      throw new Error(`A graphQL endpoint wasn't supplied for this query`);
+      console.log("A graphQL endpoint wasn't supplied for this query");
+      return {};
+      // throw new Error(`A graphQL endpoint wasn't supplied for this query`);
     }
 
     const payload = {

@@ -75,6 +75,8 @@ export default function useWeb3() {
   const isArbitrum = computed(
     () => appNetworkConfig.chainId === Network.ARBITRUM
   );
+  const isBaobab = computed(() => appNetworkConfig.chainId === Network.BAOBAB);
+  const isKlaytn = computed(() => appNetworkConfig.chainId === Network.KLAYTN);
   const isEIP1559SupportedNetwork = computed(
     () => appNetworkConfig.supportsEIP1559
   );
@@ -157,6 +159,8 @@ export default function useWeb3() {
     isGoerli,
     isPolygon,
     isArbitrum,
+    isBaobab,
+    isKlaytn,
     isEIP1559SupportedNetwork,
     isWalletConnecting,
     isBlocked,

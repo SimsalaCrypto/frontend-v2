@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, toRefs } from 'vue';
+import { computed, reactive } from 'vue';
 
 import useNumbers, { FNumFormats } from '@/composables/useNumbers';
 import useWeb3 from '@/services/web3/useWeb3';
@@ -29,17 +29,17 @@ const emit = defineEmits<{
 const { fNum2 } = useNumbers();
 const { isWalletReady } = useWeb3();
 
-const {
-  fiatTotal,
-  hasNoBalances,
-  hasAllTokens,
-  priceImpact,
-  highPriceImpact,
-  maximized,
-  optimized,
-  loadingData,
-  supportsPropotionalOptimization,
-} = toRefs(reactive(props.math));
+const fiatTotal = reactive(props.math.fiatTotal);
+const hasNoBalances = reactive(props.math.hasNoBalances);
+const hasAllTokens = reactive(props.math.hasAllTokens);
+const priceImpact = reactive(props.math.priceImpact);
+const highPriceImpact = reactive(props.math.highPriceImpact);
+const maximized = reactive(props.math.maximized);
+const optimized = reactive(props.math.optimized);
+const loadingData = reactive(props.math.loadingData);
+const supportsPropotionalOptimization = reactive(
+  props.math.supportsPropotionalOptimization
+);
 
 /**
  * COMPUTED

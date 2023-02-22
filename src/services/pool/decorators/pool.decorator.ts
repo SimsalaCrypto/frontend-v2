@@ -73,10 +73,10 @@ export class PoolDecorator {
    * (see getTimeTravelBlock).
    */
   private async getSnapshots(): Promise<Pool[]> {
-    const blockNumber = await getTimeTravelBlock();
-    const block = { number: blockNumber };
-    const isInPoolIds = { id: { in: this.pools.map(pool => pool.id) } };
     try {
+      const blockNumber = await getTimeTravelBlock();
+      const block = { number: blockNumber };
+      const isInPoolIds = { id: { in: this.pools.map(pool => pool.id) } };
       return await this.poolSubgraph.pools.get({
         where: isInPoolIds,
         block,

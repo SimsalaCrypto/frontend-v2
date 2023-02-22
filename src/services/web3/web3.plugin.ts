@@ -57,6 +57,8 @@ export const networkMap = {
   [Network.GOERLI]: 'goerli',
   [Network.POLYGON]: 'polygon',
   [Network.ARBITRUM]: 'arbitrum-one',
+  [Network.BAOBAB]: 'baobab',
+  [Network.KLAYTN]: 'klaytn',
 };
 
 export const Web3ProviderSymbol = Symbol('WEB3_PROVIDER');

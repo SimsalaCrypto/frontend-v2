@@ -514,7 +514,7 @@ const POOLS_BAOBAB: Pools = {
     ],
   },
   Factories: {
-    '0xC9C58BD6c6c1CAc12F8A174670BEC9e4C0924181': 'weightedPool', // weighted pool v2
+    '0xc9c58bd6c6c1cac12f8a174670bec9e4c0924181': 'weightedPool', // weighted pool v2
   },
   Stakable: {
     AllowList: [],

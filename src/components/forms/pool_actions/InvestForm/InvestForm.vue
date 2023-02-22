@@ -172,9 +172,9 @@ function hint(index: number): string {
 function tokenOptions(index: number): string[] {
   return isSameAddress(
     props.pool.tokensList[index],
-    wrappedNativeAsset.value.address
+    wrappedNativeAsset?.value?.address
   )
-    ? [wrappedNativeAsset.value.address, nativeAsset.address]
+    ? [wrappedNativeAsset?.value?.address, nativeAsset.address]
     : [];
 }
 

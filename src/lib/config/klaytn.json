@@ -17,7 +17,7 @@
   "poolsUrlV2": "",
   "subgraphs": {
     "main": [
-      "http://159.89.228.217:8000/subgraphs/name/balancer-labs/balancer-v2 "
+      "http://159.89.228.217:8000/subgraphs/name/balancer-labs/balancer-v2"
     ],
     "aave": "https://api.thegraph.com/subgraphs/name/aave/aave-v2-matic",
     "gauge": "https://api.thegraph.com/subgraphs/name/balancer-labs/balancer-gauges-polygon",
@@ -38,7 +38,7 @@
   "addresses": {
     "merkleRedeem": "",
     "merkleOrchard": "",
-    "multicall": "",
+    "multicall": "0x5f5f0d1b9ff8b3dcace308e39b13b203354906e9",
     "authorizer": "0x1476Ab41a45b81324dAd2A1E0B3a3281458ba502",
     "vault": "0x96D6795721B6ffDa88169D031b9FD4Dc26e29578",
     "weightedPoolFactory": "0xC9C58BD6c6c1CAc12F8A174670BEC9e4C0924181",

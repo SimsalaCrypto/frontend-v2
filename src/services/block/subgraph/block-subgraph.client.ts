@@ -11,6 +11,10 @@ export default class BlockSubgraphClient {
   }
 
   public async get(query) {
+    if (!this.url) {
+      return {};
+    }
+
     try {
       const payload = this.toPayload(query);
       const {
