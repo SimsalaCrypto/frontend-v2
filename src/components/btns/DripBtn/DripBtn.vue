@@ -33,7 +33,7 @@ async function dripTx() {
 <template>
   <TxActionBtn
     label="Drip"
-    color="gradient"
+    color="red"
     size="sm"
     :actionFn="dripTx"
     action="drip"

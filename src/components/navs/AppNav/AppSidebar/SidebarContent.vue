@@ -202,7 +202,7 @@ watch(blockNumber, async () => {
 
 <style scoped>
 .side-bar-link {
-  @apply transition duration-300 p-4 py-1.5 hover:bg-gray-850 cursor-pointer;
+  @apply transition duration-200 p-4 py-1.5 hover:bg-gray-850 cursor-pointer;
 }
 
 .side-bar-btn {

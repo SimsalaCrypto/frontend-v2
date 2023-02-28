@@ -85,13 +85,13 @@ const submissionDisabled = computed(() => {
       <BalBtn
         v-if="!isWalletReady"
         :label="$t('connectWallet')"
-        color="gradient"
+        color="red"
         block
         @click="startConnectWithInjectedProvider"
       />
       <BalBtn
         v-else
-        color="gradient"
+        color="red"
         block
         :disabled="submissionDisabled"
         @click="showPreviewModal = true"

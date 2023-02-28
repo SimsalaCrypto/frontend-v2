@@ -172,7 +172,11 @@ onMounted(() => {
 }
 
 .input {
-  @apply flex-grow bg-transparent overflow-hidden;
+  @apply flex-grow bg-transparent overflow-hidden text-white;
+}
+
+.input::placeholder {
+  color: white;
 }
 
 .label {

@@ -461,7 +461,7 @@ function onAlertMountChange() {
         </AnimatePresence>
         <BalBtn
           block
-          color="gradient"
+          color="red"
           :disabled="isProceedDisabled"
           @click="handleProceed"
         >

@@ -9,7 +9,7 @@
 }
 
 .icon-spin-anim:hover .bal-icon {
-  @apply text-blue-600 dark:text-blue-400;
+  @apply text-blue-600 dark:text-red-900;
 }
 
 @keyframes fadeIn {
@@ -96,7 +96,7 @@
 }
 
 .appear-enter-active {
-  @apply transition-all duration-300 ease-out;
+  @apply transition-all duration-200 ease-out;
 }
 
 .appear-enter-to,

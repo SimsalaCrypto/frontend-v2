@@ -207,6 +207,7 @@ function getPickedTokens(tokens: PoolToken[]) {
       :isLoading="isLoading"
       skeletonClass="h-64"
       sticky="both"
+      :plainTable="true"
       :square="upToLargeBreakpoint"
       :isPaginated="isPaginated"
       :href="{ getHref: gauge => getPoolExternalUrl(gauge) }"

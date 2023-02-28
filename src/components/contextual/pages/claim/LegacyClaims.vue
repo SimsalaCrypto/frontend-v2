@@ -219,7 +219,7 @@ async function claimAvailableRewards() {
       </BalCard>
       <BalBtn
         v-if="!isAirdrop"
-        color="gradient"
+        color="red"
         size="md"
         block
         class="mb-6"

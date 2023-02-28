@@ -121,14 +121,14 @@ onBeforeMount(() => {
       <BalBtn
         v-if="!isWalletReady"
         :label="$t('connectWallet')"
-        color="gradient"
+        color="red"
         block
         @click="startConnectWithInjectedProvider"
       />
       <BalBtn
         v-else
         :label="$t('preview')"
-        color="gradient"
+        color="red"
         :disabled="
           !hasAmountsOut ||
           !hasValidInputs ||

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="group flex justify-center items-center w-9 h-9 bg-gray-50 dark:bg-gray-900 rounded-full shadow cursor-pointer toggle-btn"
+    class="group flex justify-center items-center w-9 h-9 bg-gray-50 dark:bg-gray-650 rounded-full shadow cursor-pointer toggle-btn"
     @click="toggle"
   >
     <div
-      class="duration-300 ease-in-out"
+      class="duration-200 ease-in-out"
       :class="{ 'transform rotate-180': isRotated }"
     >
       <svg

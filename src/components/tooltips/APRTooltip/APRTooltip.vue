@@ -66,6 +66,7 @@ const totalLabel = computed((): string =>
           size="sm"
           class="text-gray-400 dark:text-gray-500"
           v-bind="$attrs"
+          stroke="white"
         />
       </div>
     </template>

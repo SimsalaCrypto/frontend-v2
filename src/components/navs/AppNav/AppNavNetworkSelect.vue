@@ -21,7 +21,7 @@ export interface NetworkOption {
 }
 
 // COMPOSABLES
-const { upToLargeBreakpoint } = useBreakpoints();
+const { upToLargeBreakpoint, isDesktop } = useBreakpoints();
 const { networkId, networkConfig } = useNetwork();
 const { chainId } = useWeb3();
 const router = useRouter();
@@ -145,16 +145,22 @@ function isActive(network: NetworkOption): boolean {
 </script>
 
 <template>
-  <BalPopover noPad>
+  <p v-if="isDesktop" class="network-select-label">Chain</p>
+  <BalPopover
+    class="bg-gray-50 dark:bg-gray-700 rounded"
+    :position="isDesktop ? 'above' : 'below'"
+  >
     <template #activator>
       <BalBtn color="white" :size="upToLargeBreakpoint ? 'md' : 'sm'">
         <template v-if="activeNetwork">
-          <img
+          <!-- <img
             :src="buildNetworkIconURL(activeNetwork.id)"
             :alt="activeNetwork.name"
             class="w-6 h-6 rounded-full"
-          />
-          <span class="ml-2">
+          /> -->
+          <span
+            class="ml-2 w-full text-black hover:text-white dark:text-white capitalize network-name"
+          >
             {{ activeNetwork.name }}
           </span>
           <BalIcon name="chevron-down" size="sm" class="ml-2" />
@@ -163,7 +169,7 @@ function isActive(network: NetworkOption): boolean {
     </template>
     <div class="flex overflow-hidden flex-col w-44 rounded-lg">
       <div
-        class="py-2 px-3 text-sm font-medium text-gray-500 whitespace-nowrap bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-900"
+        class="py-2 px-3 text-sm font-medium text-black dark:text-white whitespace-nowrap bg-gray-50 dark:bg-gray-800 border-b dark:border-gray-900"
       >
         {{ $t('networkSelection') }}:
       </div>
@@ -179,18 +185,36 @@ function isActive(network: NetworkOption): boolean {
             :alt="network.name"
             class="mr-2 w-6 h-6 rounded-full"
           />
-          <span class="ml-1 font-medium">
+          <span class="ml-1 font-medium text-black dark:text-white">
             {{ network.name }}
           </span>
         </div>
-        <BalIcon
+        <!-- <BalIcon
           v-if="isActive(network)"
           name="check"
           class="text-blue-500 dark:text-blue-400"
-        />
+        /> -->
       </a>
     </div>
   </BalPopover>
 </template>
 
+<style>
+.network-select-label {
+  color: #666c81;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  margin-bottom: 4px;
+  margin-top: 24px;
+  letter-spacing: 0.05em;
+}
 
+.network-name {
+  line-height: 1;
+  text-align: left;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+</style>

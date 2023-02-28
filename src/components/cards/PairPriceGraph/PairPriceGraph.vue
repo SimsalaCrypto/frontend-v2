@@ -290,7 +290,7 @@ const chartGrid = computed(() => {
           v-if="failedToLoadPriceData && tokenOutAddress"
           class="flex justify-center items-center w-full h-full"
         >
-          <span class="text-sm text-gray-400">{{
+          <span class="text-sm text-gray-600">{{
             $t('insufficientData')
           }}</span>
         </div>

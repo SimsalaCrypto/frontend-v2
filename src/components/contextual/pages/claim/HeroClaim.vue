@@ -150,7 +150,7 @@ defineProps<Props>();
 }
 
 .tip-icon {
-  @apply pb-4 transition-transform duration-300 w-20 md:w-24 lg:w-full;
+  @apply pb-4 transition-transform duration-200 w-20 md:w-24 lg:w-full;
 }
 
 .tip-label {

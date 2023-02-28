@@ -56,7 +56,7 @@ function claimTx() {
 <template>
   <TxActionBtn
     :label="tokenAddress ? $t('claim') : $t('claimAll')"
-    color="gradient"
+    color="red"
     size="sm"
     :actionFn="claimTx"
     :onConfirmFn="protocolRewardsQuery.refetch.value"

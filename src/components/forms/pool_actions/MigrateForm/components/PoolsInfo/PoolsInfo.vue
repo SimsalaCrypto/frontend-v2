@@ -192,7 +192,7 @@ const isUnstakedMigrationEnabled = computed(() => {
     </div>
     <PoolInfoBreakdown :pool="toPool" :poolTokenInfo="toPoolTokenInfo" />
     <BalBtn
-      color="gradient"
+      color="red"
       class="mt-6"
       block
       :disabled="isPreviewModalBtnDisabled"

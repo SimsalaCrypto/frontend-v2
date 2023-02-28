@@ -150,7 +150,7 @@ const fiatTotalExpiredLpTokens = computed(() =>
                   >
                     <BalBtn
                       :disabled="Number(bptBalance) === 0"
-                      color="gradient"
+                      color="red"
                       size="sm"
                     >
                       {{ $t('lock') }}
@@ -159,7 +159,7 @@ const fiatTotalExpiredLpTokens = computed(() =>
                   <BalBtn
                     v-else
                     :disabled="Number(bptBalance) === 0"
-                    color="gradient"
+                    color="red"
                     size="sm"
                   >
                     {{ $t('lock') }}

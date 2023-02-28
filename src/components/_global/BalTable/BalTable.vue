@@ -44,6 +44,7 @@ type Props = {
   initialState?: InitialState;
   pin?: DataPinState | null;
   getTableRowClass?: (rowData: DataProp, rowIndex: number) => string;
+  plainTable?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -200,7 +201,10 @@ watch(
     ]"
   >
     <div ref="headerRef" class="overflow-hidden">
-      <table class="w-full whitespace-normal table-fixed">
+      <table
+        class="w-full whitespace-normal table-fixed"
+        :class="[props.plainTable ? '' : 'table-styles']"
+      >
         <!-- header width handled by colgroup  -->
         <colgroup>
           <col
@@ -210,23 +214,20 @@ watch(
           />
         </colgroup>
         <!-- header is rendered as a row - seperated by columns -->
-        <thead class="z-10 bg-white dark:bg-gray-900">
+        <thead class="z-10 bg-transparent">
           <th
             v-for="(column, columnIndex) in filteredColumns"
             :key="`header-${column.id}`"
             :ref="columnIndex == 0 ? 'stickyHeaderRef' : undefined"
             :class="[
-              'p-6 bg-white dark:bg-gray-850 headingShadow border-b dark:border-gray-900',
+              'p-6 bg-white dark:bg-transparent headingShadow border-b dark:border-gray-900',
               column.className,
               getHorizontalStickyClass(columnIndex),
               isColumnStuck ? 'isSticky' : '',
               column.sortKey ? 'cursor-pointer' : '',
-              column.sortKey && currentSortColumn !== column.id
-                ? 'text-gray-800 hover:text-purple-600 focus:text-blue-500 dark:text-gray-100 dark:hover:text-yellow-500 dark:focus:text-yellow-500 transition-colors'
-                : '',
               currentSortColumn === column.id && currentSortDirection
-                ? 'text-blue-600 hover:text-blue-500 focus:text-purple-600 dark:text-blue-400 dark:hover:text-blue-600 dark:focus:text-blue-600 transition-colors'
-                : '',
+                ? 'text-black hover:text-red-900 focus:text-red-900 dark:text-white dark:hover:text-red-900 dark:focus:text-red-900 transition-colors'
+                : 'text-gray-800 hover:text-red-900 focus:text-red-900 dark:text-white dark:hover:text-red-900 dark:focus:text-red-900 transition-colors',
             ]"
             @click="handleSort(column.id)"
           >
@@ -237,7 +238,7 @@ watch(
                 :name="column.Header"
               />
               <div v-else>
-                <h5 class="text-base">
+                <h5 class="column-header">
                   {{ column.name }}
                 </h5>
               </div>
@@ -273,7 +274,7 @@ watch(
       />
       <div
         v-else-if="!isLoading && !tableData.length"
-        class="flex justify-start items-center p-6 max-w-full h-24 bg-white dark:bg-gray-850 row-bg text-secondary"
+        class="flex justify-start items-center p-6 max-w-full h-24 text-gray-600 bg-white dark:bg-gray-600 row-bg"
       >
         {{ noResultsLabel || $t('noResults') }}
       </div>
@@ -374,6 +375,22 @@ watch(
 </template>
 
 <style>
+.table-styles {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+
+  @apply dark:border-gray-650 dark:bg-gray-800 border-transparent;
+}
+
+.column-header {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.05em;
+
+  @apply uppercase;
+}
+
 .horizontalSticky {
   @apply z-10 opacity-95 xs:opacity-90;
 
@@ -401,7 +418,7 @@ watch(
 }
 
 .row-bg {
-  @apply bg-white dark:bg-gray-850 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ease-in duration-300;
+  @apply bg-gray-50 dark:bg-transparent hover:bg-gray-50 dark:hover:bg-gray-650 transition-colors ease-in duration-200;
 }
 
 .bal-table-pagination-btn {

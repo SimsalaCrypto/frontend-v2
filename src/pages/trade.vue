@@ -8,6 +8,7 @@ import usePoolFilters from '@/composables/pools/usePoolFilters';
 import useBreakpoints from '@/composables/useBreakpoints';
 import BridgeLink from '@/components/links/BridgeLink.vue';
 import { isL2 } from '@/composables/useNetwork';
+import PageHero from '@/components/heros/PageHero.vue';
 
 /**
  * STATE
@@ -54,6 +55,12 @@ onMounted(() => {
 
 <template>
   <div>
+    <PageHero
+      :title="$t('trade')"
+      :subtitle="$t('swap')"
+      :heroType="'default'"
+    />
+    <div class="divider" />
     <Col3Layout offsetGutters mobileHideGutters class="mt-8">
       <template #gutterLeft>
         <MyWallet />
@@ -101,5 +108,13 @@ onMounted(() => {
 <style scoped>
 .graph-modal {
   height: 450px;
+}
+
+.divider {
+  height: 1px;
+  margin-bottom: 60px;
+  max-width: calc(100% - 10rem);
+
+  @apply mx-20 w-full bg-gray-650 dark:bg-gray-650;
 }
 </style>

@@ -5,6 +5,7 @@ import VeBalPoolTable from '@/components/contextual/pages/pools/VeBalPoolTable.v
 import PortfolioPageHero from '@/components/heros/PortfolioPageHero.vue';
 import { useLock } from '@/composables/useLock';
 import StakingProvider from '@/providers/local/staking/staking.provider';
+import PageHero from '@/components/heros/PageHero.vue';
 
 // COMPOSABLES
 
@@ -13,7 +14,14 @@ const { lockPool, lock } = useLock();
 
 <template>
   <StakingProvider>
-    <PortfolioPageHero />
+    <PageHero
+      :title="$t('myInvestments')"
+      :subtitle="$t('portfolio')"
+      :heroType="'secondary-column'"
+    />
+
+    <div class="divider" />
+    <!-- <PortfolioPageHero /> -->
     <div class="xl:container xl:px-4 pt-10 md:pt-12 xl:mx-auto">
       <BalStack vertical>
         <div class="px-4 xl:px-0">
@@ -34,3 +42,18 @@ const { lockPool, lock } = useLock();
     </div>
   </StakingProvider>
 </template>
+
+<style scoped>
+.page-hero-wrapper {
+  padding-right: 5rem;
+  @apply flex justify-between items-center;
+}
+
+.divider {
+  height: 1px;
+  margin-bottom: 60px;
+  max-width: calc(100% - 10rem);
+
+  @apply mx-20 w-full bg-gray-650 dark:bg-gray-650;
+}
+</style>

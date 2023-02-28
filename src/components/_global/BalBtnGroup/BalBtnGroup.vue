@@ -5,9 +5,9 @@
       :key="option.value"
       outline
       size="sm"
-      class="mr-2 capitalize w-18"
+      class="mr-2 capitalize btn-override w-18"
       v-bind="attrs_"
-      :color="modelValue === option.value ? 'blue' : 'gray'"
+      :color="modelValue === option.value ? 'white' : 'gray'"
       @click="onSelect(option)"
     >
       {{ 'best' === option.label ? $t(option.label) : option.label }}
@@ -55,3 +55,15 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.btn-override {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  padding: 12px 16px;
+  border-width: 1px;
+  height: 48px;
+}
+</style>

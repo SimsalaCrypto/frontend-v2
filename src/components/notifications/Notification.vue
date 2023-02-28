@@ -109,7 +109,7 @@ export default defineComponent({
       }
 
       return `
-          progress-bar absolute bottom-0 left-0 opacity-80 w-0 transition duration-300 ease-linear h-1 ${bgClasses}
+          progress-bar absolute bottom-0 left-0 opacity-80 w-0 transition duration-200 ease-linear h-1 ${bgClasses}
         `;
     });
 

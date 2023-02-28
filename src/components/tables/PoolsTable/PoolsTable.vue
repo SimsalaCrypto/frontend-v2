@@ -337,7 +337,7 @@ function iconAddresses(pool: PoolWithShares) {
         <div class="flex justify-center py-4 px-2">
           <BalBtn
             v-if="isMigratablePool(pool)"
-            color="gradient"
+            color="red"
             size="sm"
             @click.prevent="navigateToPoolMigration(pool)"
           >

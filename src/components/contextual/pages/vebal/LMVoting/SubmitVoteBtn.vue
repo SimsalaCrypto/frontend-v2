@@ -44,7 +44,7 @@ const emit = defineEmits<{
     </template>
     <BalBtn
       v-else
-      color="gradient"
+      color="red"
       block
       :disabled="disabled"
       :loading="loading"

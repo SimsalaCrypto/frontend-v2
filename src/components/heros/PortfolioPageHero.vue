@@ -81,8 +81,9 @@ const isLoadingTotalValue = computed(
         class="mx-auto w-40 h-10"
         white
       />
-      <div v-else class="mb-1 text-3xl font-semibold text-white">
-        {{ totalInvestedLabel }}
+      <div v-else class="title">
+        <h2 class="sub-title">Total Value</h2>
+        <span>{{ totalInvestedLabel }}</span>
       </div>
       <div v-if="!isL2" class="inline-block relative mt-2">
         <BalLoadingBlock
@@ -112,6 +113,19 @@ const isLoadingTotalValue = computed(
 </template>
 
 <style>
+.sub-title {
+  font-family: 'DM Sans', sans-serif;
+  @apply text-xs font-bold text-red-900 capitalize text-right;
+}
+
+.title {
+  font-family: good-times, sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+
+  @apply font-bold dark:text-white text-black uppercase;
+}
+
 .vebal-banner::before {
   @apply border border-yellow-500;
 

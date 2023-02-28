@@ -36,16 +36,14 @@ function isActive(page: string): boolean {
       :active="isActive('trade')"
       @click="trackGoal(Goals.ClickNavSwap)"
     >
-      {{ $t('swap') }}
+      {{ $t('trade') }}
     </DesktopLinkItem>
     <DesktopLinkItem
       :to="{ name: 'claim', params: { networkSlug } }"
       :active="isActive('claim')"
       @click="trackGoal(Goals.ClickNavClaim)"
     >
-      <div class="flex items-center">
-        {{ $t('claim') }}
-      </div>
+      {{ $t('claim') }}
     </DesktopLinkItem>
     <DesktopLinkItem
       v-if="isGoerli"
@@ -66,13 +64,15 @@ function isActive(page: string): boolean {
       :active="isActive('vebal')"
       @click="trackGoal(Goals.ClickNavVebal)"
     >
-      veBAL
+      veMSTRL
     </DesktopLinkItem>
   </div>
 </template>
 
 <style scoped>
 .desktop-links {
-  @apply grid gap-6 grid-flow-col grid-rows-1 h-full content-center;
+  @apply flex flex-col gap-6;
+
+  text-align: center;
 }
 </style>

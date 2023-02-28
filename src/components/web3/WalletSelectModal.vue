@@ -49,9 +49,7 @@ const wallets = ref(SupportedWallets.filter(id => id !== 'gnosis'));
       </router-link>
     </p>
     <WalletButton v-for="wallet in wallets" :key="wallet" :wallet="wallet" />
-    <div
-      class="p-4 bg-gradient-to-b from-gray-50 dark:from-gray-900 to-gray-100 dark:to-gray-850 rounded-lg"
-    >
+    <div class="p-4 bg-red-900 rounded-lg">
       <h6>{{ $t('newToEthereum') }}</h6>
       <p class="text-sm">
         {{ $t('setUpEthereumWallet') }}

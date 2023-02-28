@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { PoolToken } from '@/services/pool/types';
 import BalanceTooltip from './BalanceTooltip.vue';
+import { isAddress } from '@ethersproject/address';
+
+const emit = defineEmits(['click', 'submit']);
 
 type Props = {
   hasBalance: boolean;
@@ -16,12 +19,18 @@ withDefaults(defineProps<Props>(), {
   isSelected: false,
   isPicked: false,
 });
+
+function assetAttrsFor(addressOrURI: string) {
+  return isAddress(addressOrURI)
+    ? { address: addressOrURI }
+    : { iconURI: addressOrURI };
+}
 </script>
 
 <template>
   <BalTooltip
     :disabled="!hasBalance"
-    class="mr-2 last:mr-0 leading-normal cursor-pointer"
+    class="leading-normal cursor-pointer pill-container"
     textAlign="left"
     :delayMs="50"
   >
@@ -36,19 +45,27 @@ withDefaults(defineProps<Props>(), {
           },
         ]"
       >
+        <BalAsset
+          v-bind="{ ...assetAttrsFor(token.address) }"
+          :size="18"
+          :class="['pill-icon']"
+          @click="emit('click', token.address)"
+        />
         <div v-if="hasBalance" class="balance-indicator" />
-        <span
-          :class="[
-            {
-              'font-medium': isSelected,
-            },
-          ]"
-        >
-          {{ symbol }}
-        </span>
-        <span class="pill-weight">
-          {{ weight }}
-        </span>
+        <div class="flex flex-col items-start">
+          <span
+            :class="[
+              {
+                'font-medium': isSelected,
+              },
+            ]"
+          >
+            {{ symbol }}
+          </span>
+          <span class="pill-weight">
+            {{ weight }}
+          </span>
+        </div>
       </div>
     </template>
     <BalanceTooltip :token="token" :symbol="symbol" />
@@ -57,7 +74,12 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped>
 .pill {
-  @apply flex items-center px-2 my-1 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 relative h-10 items-center;
+  @apply flex items-center relative h-full;
+
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: rgb(35 36 43);
 }
 
 .pill-selected {
@@ -69,7 +91,7 @@ withDefaults(defineProps<Props>(), {
 }
 
 .pill-weight {
-  @apply font-medium text-gray-600 dark:text-gray-400 text-xs;
+  @apply font-medium text-gray-600 dark:text-gray-600 text-xs;
   @apply mt-px ml-1;
 }
 

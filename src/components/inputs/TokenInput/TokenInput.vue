@@ -282,7 +282,7 @@ watch(_address, async (newAddress, oldAddress) => {
         class="flex flex-col pt-1"
       >
         <div
-          class="flex justify-between items-center text-sm leading-none text-gray-600 dark:text-gray-400"
+          class="flex justify-between items-center text-sm leading-none text-gray-600 dark:text-gray-600"
         >
           <div v-if="!isWalletReady || disableBalance" />
           <button v-else class="flex items-center" @click="setMax">
@@ -296,7 +296,7 @@ watch(_address, async (newAddress, oldAddress) => {
             <template v-if="hasBalance && !noMax && !disableMax">
               <span
                 v-if="!isMaxed"
-                class="text-blue-600 hover:text-purple-600 focus:text-purple-600 dark:text-blue-400 dark:hover:text-yellow-500 dark:focus:text-yellow-500 transition-colors"
+                class="text-blue-600 hover:text-purple-600 focus:text-purple-600 dark:text-red-900 dark:focus:text-yellow-500 transition-colors"
               >
                 {{ $t('max') }}
               </span>
@@ -308,7 +308,7 @@ watch(_address, async (newAddress, oldAddress) => {
               </span>
             </template>
           </button>
-          <div class="pl-2 truncate">
+          <div class="pl-2 dark:text-gray-600 truncate">
             <template v-if="hasAmount && hasToken">
               <span v-if="!hideFiatValue">
                 {{ fNum2(tokenValue, FNumFormats.fiat) }}

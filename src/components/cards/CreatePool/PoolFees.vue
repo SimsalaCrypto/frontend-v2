@@ -305,7 +305,7 @@ async function onChangeFeeController(val: string) {
           :disabled="isProceedDisabled || isLoadingSimilarPools"
           type="submit"
           block
-          color="gradient"
+          color="red"
           :loading="isLoadingSimilarPools"
           @click="proceed"
         >

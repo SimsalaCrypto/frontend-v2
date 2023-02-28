@@ -8,7 +8,7 @@ import { shorten } from '@/lib/utils';
 
 import AppNavSettings from './AppNavSettings.vue';
 
-const { bp, upToLargeBreakpoint, isMobile } = useBreakpoints();
+const { bp, upToLargeBreakpoint, isDesktop, isMobile } = useBreakpoints();
 const { isLoadingProfile, profile, account } = useWeb3();
 
 const avatarSize = computed(() => {
@@ -23,40 +23,65 @@ const avatarSize = computed(() => {
 </script>
 
 <template>
-  <BalPopover
-    noPad
-    :align="isMobile ? 'center' : undefined"
-    :detached="isMobile ? true : undefined"
-  >
-    <template #activator>
-      <BalBtn
-        class="text-base"
-        :class="{ btn: upToLargeBreakpoint }"
-        :loading="isLoadingProfile"
-        :loadingLabel="upToLargeBreakpoint ? '' : $t('connecting')"
-        color="white"
-        :size="upToLargeBreakpoint ? 'md' : 'sm'"
-        :circle="upToLargeBreakpoint"
-      >
-        <Avatar
-          :iconURI="profile?.avatar || ''"
-          :address="account"
-          :size="avatarSize"
-        />
-        <span
-          v-if="profile && profile.ens"
-          class="hidden lg:inline-block pl-2"
-          v-text="profile && profile.ens"
-        />
-        <span
-          v-else
-          class="hidden lg:inline-block pl-2 eth-address"
-          v-text="shorten(account)"
-        />
-      </BalBtn>
-    </template>
-    <AppNavSettings />
-  </BalPopover>
+  <p v-if="isDesktop" class="label">Wallet</p>
+  <div>
+    <BalPopover
+      noPad
+      :align="isDesktop ? 'left' : 'left'"
+      :detached="isDesktop ? false : true"
+      :position="isDesktop ? 'above' : 'below'"
+    >
+      <template #activator>
+        <BalBtn
+          class="text-base"
+          :loading="isLoadingProfile"
+          :loadingLabel="upToLargeBreakpoint ? '' : $t('connecting')"
+          color="white"
+          :size="upToLargeBreakpoint ? 'md' : 'sm'"
+          :circle="upToLargeBreakpoint"
+          :center="false"
+          :style="{ background: 'transparent' }"
+        >
+          <Avatar
+            v-if="isMobile"
+            :iconURI="profile?.avatar || ''"
+            :address="account"
+            :size="avatarSize"
+          />
+          <span
+            v-if="profile && profile.ens"
+            class="hidden lg:inline-block pl-2"
+            v-text="profile && profile.ens"
+          />
+          <span
+            v-else
+            class="hidden lg:inline-block pl-2 eth-address"
+            v-text="shorten(account)"
+          />
+        </BalBtn>
+      </template>
+      <AppNavSettings />
+    </BalPopover>
+  </div>
 </template>
 
+<style scoped>
+.label {
+  color: #666c81;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  margin-bottom: 4px;
+  margin-top: 24px;
+  letter-spacing: 0.05em;
+}
 
+.eth-address {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+
+  @apply capitalize dark:text-white;
+}
+</style>

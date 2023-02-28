@@ -75,6 +75,7 @@ watch(iconSRC, newURL => {
   >
     <img
       v-if="iconSRC && !error"
+      :alt="token?.symbol"
       :src="iconSRC"
       class="bg-white rounded-full"
       @error="error = true"

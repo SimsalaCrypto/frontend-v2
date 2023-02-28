@@ -365,7 +365,7 @@ function saveAndProceed() {
         <BalBtn
           :disabled="isExceedingWalletBalance || hasZeroAmount"
           block
-          color="gradient"
+          color="red"
           @click="saveAndProceed"
         >
           {{ t('preview') }}

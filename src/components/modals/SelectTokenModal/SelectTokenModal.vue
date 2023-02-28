@@ -186,11 +186,12 @@ watchEffect(() => {
         <div class="flex items-center">
           <BalBtn
             v-if="state.selectTokenList"
-            color="gray"
+            color="white"
             size="xs"
             class="mr-2"
             flat
             circle
+            fill="white"
             @click="onListExit"
           >
             <BalIcon name="arrow-left" size="sm" />
@@ -202,7 +203,7 @@ watchEffect(() => {
           class="group flex items-center mr-2 cursor-pointer"
           @click="toggleSelectTokenList"
         >
-          <span class="text-xs text-secondary">{{ $t('tokenLists') }}</span>
+          <span class="text-xs text-600">{{ $t('tokenLists') }}</span>
           <div class="flex items-center ml-2">
             <span class="mr-1">
               <img
@@ -215,7 +216,8 @@ watchEffect(() => {
             <BalIcon
               name="chevron-down"
               size="sm"
-              class="ml-1 text-blue-500 group-hover:text-pink-500 group-focus:text-pink-500 dark:text-blue-400 transition-all duration-200 ease-out"
+              class="ml-1 text-blue-500 group-hover:text-pink-500 group-focus:text-pink-500 dark:text-gray-600 transition-all duration-200 ease-out"
+              stroke="white"
             />
           </div>
         </div>
@@ -233,7 +235,12 @@ watchEffect(() => {
         >
           <template #prepend>
             <div class="flex justify-center items-center w-8 h-full">
-              <BalIcon name="search" size="sm" class="mr-2 text-gray-500" />
+              <BalIcon
+                name="search"
+                size="sm"
+                class="mr-2 text-gray-500"
+                stroke="white"
+              />
             </div>
           </template>
         </BalTextInput>
@@ -271,7 +278,12 @@ watchEffect(() => {
         >
           <template #prepend>
             <div class="flex justify-center items-center w-8 h-full">
-              <BalIcon name="search" size="sm" class="mr-2 text-gray-500" />
+              <BalIcon
+                name="search"
+                size="sm"
+                class="mr-2 text-gray-500"
+                stroke="white"
+              />
             </div>
           </template>
         </BalTextInput>

@@ -7,12 +7,16 @@ type Props = {
   trigger?: PopoverTrigger;
   align?: string;
   detached?: boolean;
+  position?: 'above' | 'below';
+  style?: any;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   trigger: 'click',
   align: 'right',
   detached: false,
+  position: undefined,
+  style: undefined,
 });
 
 const emit = defineEmits<{
@@ -34,6 +38,8 @@ const popoverWrapperClasses = computed(() => ({
   [`${props.align}-0`]: !props.detached,
   'align-center-transform': props.detached && props.align === 'center',
   'align-right-transform': props.detached && props.align === 'right',
+  'bal-popover-above': props.position === 'above',
+  'bal-popover-below': props.position === 'below',
 }));
 
 const popoverActivatorWrapperClasses = computed(() => ({
@@ -83,6 +89,7 @@ watch(popoverOpened, () => {
   <div
     v-click-outside="handleClickOutside"
     :class="[popoverActivatorWrapperClasses]"
+    :style="props.style"
   >
     <div
       ref="activatorWrapper"
@@ -102,6 +109,14 @@ watch(popoverOpened, () => {
 </template>
 
 <style scoped>
+.bal-popover-above {
+  bottom: 50%;
+}
+
+.bal-popover-below {
+  top: 50%;
+}
+
 .bal-popover-wrapper {
   @apply invisible opacity-0 absolute z-30 pt-3;
 

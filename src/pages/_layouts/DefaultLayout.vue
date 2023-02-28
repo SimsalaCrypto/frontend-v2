@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import Footer from '@/components/footer/Footer.vue';
 import AppNav from '@/components/navs/AppNav/AppNav.vue';
+import useBreakpoints from '@/composables/useBreakpoints';
+const { isMobile } = useBreakpoints();
 </script>
 
 <template>
   <div>
-    <div class="app-body">
+    <div class="app-body" :style="isMobile ? { display: 'block' } : {}">
       <AppNav />
-      <div class="pb-16">
+      <div class="bg-gray-50 dark:bg-gray-900">
         <router-view v-slot="{ Component }" :key="$route.path">
           <transition appear name="appear">
             <component :is="Component" />
@@ -15,7 +17,7 @@ import AppNav from '@/components/navs/AppNav/AppNav.vue';
         </router-view>
       </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
@@ -28,5 +30,7 @@ import AppNav from '@/components/navs/AppNav/AppNav.vue';
   @apply mb-8;
 
   min-height: calc(100vh - 2rem);
+  display: grid;
+  grid-template-columns: 240px 1fr;
 }
 </style>

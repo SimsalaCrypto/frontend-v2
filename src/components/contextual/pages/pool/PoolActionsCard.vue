@@ -49,7 +49,7 @@ const joinDisabled = computed(
     <BalBtn
       v-if="!isWalletReady"
       :label="$t('connectWallet')"
-      color="gradient"
+      color="red"
       block
       @click="startConnectWithInjectedProvider"
     />
@@ -58,7 +58,7 @@ const joinDisabled = computed(
         :tag="joinDisabled ? 'div' : 'router-link'"
         :to="{ name: 'invest', params: { networkSlug } }"
         :label="$t('addLiquidity')"
-        color="gradient"
+        color="red"
         :disabled="joinDisabled"
         block
         @click="trackGoal(Goals.ClickAddLiquidity)"
@@ -68,7 +68,7 @@ const joinDisabled = computed(
         :to="{ name: 'withdraw', params: { networkSlug } }"
         :label="$t('withdraw.label')"
         :disabled="!hasBpt"
-        color="blue"
+        color="gray"
         outline
         block
         @click="trackGoal(Goals.ClickWithdraw)"

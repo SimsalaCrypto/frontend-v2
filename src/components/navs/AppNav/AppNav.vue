@@ -20,7 +20,7 @@ const appNav = ref<HTMLDivElement>();
 /**
  * COMPOSABLES
  */
-const { bp, isDesktop } = useBreakpoints();
+const { bp, isDesktop, isMobile } = useBreakpoints();
 const { trackGoal, Goals } = useFathom();
 const { currentAlert } = useAlerts();
 const { networkSlug } = useNetwork();
@@ -52,9 +52,9 @@ onUnmounted(() => {
 
 <template>
   <AppNavAlert v-if="currentAlert" :alert="currentAlert" />
-  <nav id="app-nav" ref="appNav" class="sticky top-0 lg:px-6 pr-1 pl-4 h-20">
-    <div class="flex justify-between items-center h-full">
-      <div class="flex items-center h-full">
+  <nav v-if="isDesktop" id="app-nav" ref="appNav" class="sticky top-0 h-20">
+    <div class="flex flex-col justify-between items-center h-full">
+      <div class="flex flex-col items-center h-full">
         <router-link
           :to="{ name: 'home', params: { networkSlug } }"
           @click="trackGoal(Goals.ClickNavLogo)"
@@ -63,7 +63,22 @@ onUnmounted(() => {
           <AppLogo v-else />
         </router-link>
 
-        <DesktopLinks v-if="isDesktop" class="ml-8 font-medium" />
+        <DesktopLinks v-if="isDesktop" class="font-medium" />
+      </div>
+
+      <AppNavActions />
+    </div>
+  </nav>
+
+  <nav v-if="isMobile" id="app-nav-mobile" ref="appNavMobile">
+    <div class="flex justify-between align-center">
+      <div class="flex flex-col items-center h-full">
+        <router-link
+          :to="{ name: 'home' }"
+          @click="trackGoal(Goals.ClickNavLogo)"
+        >
+          <AppLogo />
+        </router-link>
       </div>
 
       <AppNavActions />
@@ -73,10 +88,19 @@ onUnmounted(() => {
 
 <style scoped>
 #app-nav {
-  @apply w-full z-30;
-  @apply bg-white dark:bg-gray-900;
-  @apply border-b border-transparent;
+  /* transition: all 0.2s ease-in-out; */
+  height: 100vh;
+  padding: 0 24px 48px;
+  border-right: 2px solid;
 
-  transition: all 0.2s ease-in-out;
+  @apply w-full z-30;
+  @apply bg-white dark:bg-gray-800;
+  @apply dark:border-gray-650 border-transparent;
+}
+
+#app-nav-mobile {
+  @apply dark:bg-gray-900 py-3 px-4 sticky top-0;
+
+  z-index: 20;
 }
 </style>

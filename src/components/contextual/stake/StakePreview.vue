@@ -234,7 +234,7 @@ function handleClose() {
       <AnimatePresence :isVisible="isActionConfirmed">
         <BalBtn
           v-if="action === 'stake'"
-          color="gradient"
+          color="red"
           block
           class="mb-2"
           @click="$router.push({ name: 'claim' })"

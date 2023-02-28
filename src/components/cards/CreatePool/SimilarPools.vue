@@ -165,7 +165,7 @@ function cancel() {
         <BalBtn block outline color="black" @click="cancel">
           {{ $t('cancel') }}
         </BalBtn>
-        <BalBtn v-if="!existingPool" block color="gradient" @click="proceed">
+        <BalBtn v-if="!existingPool" block color="red" @click="proceed">
           Continue anyway
         </BalBtn>
       </BalStack>

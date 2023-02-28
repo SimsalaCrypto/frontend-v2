@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
 
@@ -32,12 +39,27 @@ import { getAddressFromPoolId, includesAddress } from '@/lib/utils';
 import StakingProvider from '@/providers/local/staking/staking.provider';
 import useHistoricalPricesQuery from '@/composables/queries/useHistoricalPricesQuery';
 import { PoolToken } from '@/services/pool/types';
+import InvestmentTransactions from '@/components/contextual/pages/pool/PoolTransactionsCard/InvestmentTransactions/InvestmentTransactions.vue';
+import TradeTransactions from '@/components/contextual/pages/pool/PoolTransactionsCard/TradeTransactions/TradeTransactions.vue';
+
+interface PoolPageData {
+  id: string;
+  activeTab: number;
+  setActiveTab: any;
+}
 
 /**
  * STATE
  */
 const route = useRoute();
 const poolId = (route.params.id as string).toLowerCase();
+const data = reactive<PoolPageData>({
+  id: route.params.id as string,
+  activeTab: 1,
+  setActiveTab(tab) {
+    this.activeTab = tab;
+  },
+});
 
 /**
  * COMPOSABLES
@@ -60,9 +82,11 @@ const poolQueryLoading = computed(
 const loadingPool = computed(() => poolQueryLoading.value || !pool.value);
 
 const {
+  isDeepPool,
   isStableLikePool,
   isLiquidityBootstrappingPool,
   isComposableStableLikePool,
+  isStablePhantomPool,
 } = usePool(poolQuery.data);
 //#endregion
 
@@ -194,12 +218,11 @@ watch(poolQuery.error, () => {
 </script>
 
 <template>
-  <div class="xl:container lg:px-4 pt-8 xl:mx-auto">
+  <div class="xl:container dark:text-white">
     <StakingProvider :poolAddress="getAddressFromPoolId(poolId)">
-      <div
-        class="grid grid-cols-1 lg:grid-cols-3 gap-x-0 lg:gap-x-4 xl:gap-x-8 gap-y-8"
-      >
+      <div class="">
         <PoolPageHeader
+          class="mb-4"
           :loadingPool="loadingPool"
           :loadingApr="loadingApr"
           :pool="pool"
@@ -211,46 +234,8 @@ watch(poolQuery.error, () => {
           :isLiquidityBootstrappingPool="isLiquidityBootstrappingPool"
           :isComposableStableLikePool="isComposableStableLikePool"
         />
-        <div class="hidden lg:block" />
-        <div class="order-2 lg:order-1 col-span-2">
-          <div class="grid grid-cols-1 gap-y-8">
-            <div class="px-4 lg:px-0">
-              <PoolChart
-                :historicalPrices="historicalPrices"
-                :snapshots="snapshots"
-                :loading="isLoadingSnapshots"
-                :totalLiquidity="pool?.totalLiquidity"
-                :tokensList="pool ? tokensListExclBpt(pool) : []"
-                :poolType="pool?.poolType"
-                :poolPremintedBptIndex="poolPremintedBptIndex"
-              />
-            </div>
-            <div class="px-4 lg:px-0 mb-4">
-              <PoolStatCards
-                :pool="pool"
-                :poolApr="poolApr"
-                :loading="loadingPool"
-                :loadingApr="loadingApr"
-              />
-              <ApyVisionPoolLink
-                v-if="!loadingPool && pool"
-                :poolId="pool.id"
-                :tokens="titleTokens"
-              />
-            </div>
-            <div class="mb-4">
-              <h4 class="px-4 lg:px-0 mb-4" v-text="$t('poolComposition')" />
-              <BalLoadingBlock v-if="loadingPool" class="h-64" />
-              <PoolCompositionCard v-else-if="pool" :pool="pool" />
-            </div>
 
-            <div ref="intersectionSentinel" />
-            <template v-if="isSentinelIntersected && pool">
-              <PoolTransactionsCard :pool="pool" :loading="loadingPool" />
-              <PoolContractDetails :pool="pool" />
-            </template>
-          </div>
-        </div>
+        <div class="hidden lg:block" />
 
         <div
           v-if="!isLiquidityBootstrappingPool"
@@ -267,7 +252,107 @@ watch(poolQuery.error, () => {
               :missingPrices="missingPrices"
               class="mb-4"
             />
+          </BalStack>
+        </div>
 
+        <div class="pool-container">
+          <div class="details-container">
+            <div class="col-span-7 px-4 lg:px-0">
+              <PoolChart
+                :historicalPrices="historicalPrices"
+                :snapshots="snapshots"
+                :loading="isLoadingSnapshots"
+                :totalLiquidity="pool?.totalLiquidity"
+                :tokensList="pool ? tokensListExclBpt(pool) : []"
+                :poolType="pool?.poolType"
+                :poolPremintedBptIndex="poolPremintedBptIndex"
+              />
+            </div>
+
+            <div class="pool-stats-cards">
+              <PoolStatCards
+                :pool="pool"
+                :poolApr="poolApr"
+                :loading="loadingPool"
+                :loadingApr="loadingApr"
+              />
+              <!-- <ApyVisionPoolLink
+                v-if="!loadingPool && pool"
+                :poolId="pool.id"
+                :tokens="titleTokens"
+              /> -->
+            </div>
+          </div>
+
+          <div id="tabs" class="id-container">
+            <div class="tabs">
+              <a
+                :class="[data.activeTab === 1 ? 'active' : '']"
+                @click="data.setActiveTab(1)"
+                >Pool Composition</a
+              >
+              <a
+                :class="[data.activeTab === 2 ? 'active' : '']"
+                @click="data.setActiveTab(2)"
+                >Investments</a
+              >
+              <a
+                :class="[data.activeTab === 3 ? 'active' : '']"
+                @click="data.setActiveTab(3)"
+                >Trades</a
+              >
+            </div>
+
+            <div class="content">
+              <div v-if="data.activeTab === 1" class="">
+                <BalLoadingBlock v-if="loadingPool" class="h-64" />
+                <PoolCompositionCard v-else-if="pool" :pool="pool" />
+              </div>
+              <div v-if="data.activeTab === 2" class="">
+                <div ref="intersectionSentinel" />
+                <template v-if="isSentinelIntersected && pool">
+                  <InvestmentTransactions :pool="pool" :loading="loadingPool" />
+                </template>
+              </div>
+              <div v-if="data.activeTab === 3" class="">
+                <BalLoadingBlock
+                  v-if="loadingPool"
+                  class="h-40 pool-actions-card"
+                />
+                <TradeTransactions
+                  v-if="pool && !isStablePhantomPool && !isDeepPool"
+                  :pool="pool"
+                  :loading="loadingPool"
+                />
+                <!-- <StakingIncentivesCard
+                  v-if="isStakablePool && !loadingPool && pool"
+                  :pool="pool"
+                  class="staking-incentives"
+                />
+                <PoolLockingCard
+                  v-if="_isVeBalPool && !loadingPool && pool"
+                  :pool="pool"
+                  class="pool-locking"
+                /> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="mb-4">
+              <h4 class="px-4 lg:px-0 mb-4" v-text="$t('poolComposition')" />
+              <BalLoadingBlock v-if="loadingPool" class="h-64" />
+              <PoolCompositionCard v-else-if="pool" :pool="pool" />
+            </div> -->
+
+          <!-- <div ref="intersectionSentinel" />
+
+            <template v-if="isSentinelIntersected && pool">
+              <PoolTransactionsCard :pool="pool" :loading="loadingPool" />
+              <PoolContractDetails :pool="pool" />
+            </template> -->
+        </div>
+
+        <!-- <div v-if="!isLiquidityBootstrappingPool" class="">
             <BalLoadingBlock
               v-if="loadingPool"
               class="h-40 pool-actions-card"
@@ -282,14 +367,18 @@ watch(poolQuery.error, () => {
               :pool="pool"
               class="pool-locking"
             />
-          </BalStack>
-        </div>
+          </div> -->
       </div>
     </StakingProvider>
   </div>
 </template>
 
 <style scoped>
+.pool-container {
+  max-width: 950px;
+  @apply lg:pl-20 lg:pt-20 px-5 pt-5;
+}
+
 .pool-actions-card {
   @apply relative;
 }
@@ -302,5 +391,72 @@ watch(poolQuery.error, () => {
 
 .staking-incentives :deep(.active-section) {
   @apply border-transparent;
+}
+
+/* STYLING */
+.id-container {
+  @apply mt-16 lg:mb-0 mb-5;
+}
+
+.details-container {
+  @apply lg:grid lg:grid-cols-10 lg:gap-6 block;
+}
+
+.pool-stats-cards {
+  @apply col-span-3 px-4 lg:px-0 mb-4 h-full;
+}
+
+/* Style the tabs */
+.tabs {
+  @apply flex;
+}
+
+.tabs a {
+  cursor: pointer;
+  padding: 12px 16px;
+  transition: background-color 0.2s;
+  border-top: 1px solid #23262f;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.05em;
+
+  @apply dark:bg-gray-900 bg-gray-900 dark:text-gray-600 text-gray-600 uppercase;
+}
+
+.tabs a:first-of-type {
+  border-left: 1px solid #23262f;
+  border-right: 1px solid #23262f;
+  border-radius: 4px 0 0;
+}
+
+.tabs a:nth-of-type(2) {
+  /* background-color: orange !important; */
+  border-radius: 0;
+  border-right: 1px solid #23262f;
+}
+
+.tabs a:last-child {
+  border-right: 1px solid #23262f;
+  border-radius: 0 4px 0 0;
+}
+
+/* Change background color of tabs on hover */
+.tabs a:hover {
+  @apply dark:bg-gray-650 bg-gray-650 dark:text-white text-black;
+}
+
+/* Styling for active tab */
+.tabs a.active {
+  /* border-bottom: 2px solid #fff; */
+  cursor: default;
+
+  @apply dark:bg-gray-650 bg-gray-650 dark:text-white text-black;
+}
+
+/* Style the tab content */
+.content {
+  border: 1px solid #23262f;
+  @apply dark:bg-gray-800 bg-gray-800;
 }
 </style>

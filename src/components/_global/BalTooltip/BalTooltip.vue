@@ -151,8 +151,8 @@ onUnmounted(() => {
 /* Dark mode radial gradient shadow */
 .dark .tooltip::before {
   background-blend-mode: soft-light, soft-light, normal;
-  background: radial-gradient(ellipse at left, yellow, transparent),
-    radial-gradient(ellipse at bottom right, blue, transparent),
+  background: radial-gradient(ellipse at left, red, transparent),
+    radial-gradient(ellipse at bottom right, red, transparent),
     radial-gradient(ellipse at top, red, transparent);
   content: '';
 }

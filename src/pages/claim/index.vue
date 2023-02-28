@@ -4,6 +4,7 @@ import { formatUnits } from '@ethersproject/units';
 import { computed, onBeforeMount, watch } from 'vue';
 
 import HeroClaim from '@/components/contextual/pages/claim/HeroClaim.vue';
+import PageHero from '@/components/heros/PageHero.vue';
 import BalClaimsTable, {
   RewardRow,
 } from '@/components/tables/BalClaimsTable.vue';
@@ -230,10 +231,14 @@ onBeforeMount(async () => {
 
 <template>
   <div>
-    <HeroClaim
-      :title="$t('claimHero.title')"
-      :description="$t('claimHero.description')"
+    <PageHero
+      :title="$t('claim')"
+      :subtitle="'Liquidity incentives'"
+      :heroType="'default'"
     />
+
+    <div class="divider" />
+
     <div>
       <div class="xl:container py-12 xl:px-4 xl:mx-auto">
         <h2 class="px-4 xl:px-0 font-body text-2xl font-semibold">
@@ -357,3 +362,13 @@ onBeforeMount(async () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.divider {
+  height: 1px;
+  margin-bottom: 60px;
+  max-width: calc(100% - 10rem);
+
+  @apply mx-20 w-full bg-gray-650 dark:bg-gray-650;
+}
+</style>

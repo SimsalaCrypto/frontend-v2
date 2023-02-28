@@ -231,7 +231,7 @@ function navigateToGetVeBAL() {
 }
 
 .graphic {
-  @apply transition-transform duration-300 relative;
+  @apply transition-transform duration-200 relative;
 }
 
 .coin:hover .graphic {

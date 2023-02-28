@@ -732,7 +732,7 @@ watch(blockNumber, () => {
       />
       <BalBtn
         v-if="!account"
-        color="gradient"
+        color="red"
         block
         @click.prevent="startConnectWithInjectedProvider"
       >

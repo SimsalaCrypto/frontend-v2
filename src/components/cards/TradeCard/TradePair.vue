@@ -167,7 +167,7 @@ onMounted(() => {
       <div class="flex-grow mx-2 h-px bg-gray-100 dark:bg-gray-700" />
       <div
         v-if="rateLabel"
-        class="flex items-center text-xs text-gray-600 dark:text-gray-400 cursor-pointer"
+        class="flex items-center text-xs text-gray-600 dark:text-gray-600 cursor-pointer"
         @click="isInRate = !isInRate"
         v-html="rateLabel"
       />

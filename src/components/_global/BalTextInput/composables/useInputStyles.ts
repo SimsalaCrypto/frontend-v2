@@ -68,14 +68,14 @@ export default function useInputStyles(
   }));
 
   const inputContainerClasses = computed(() => ({
-    'bg-white dark:bg-gray-800': !props.disabled,
+    'bg-white dark:bg-gray-900': !props.disabled,
     'bg-gray-100 dark:bg-gray-800': props.disabled,
     [extPaddingClass()]: true,
     border: !props.noBorder,
     'border-gray-100 dark:border-gray-800': !isInvalid.value && !isActive.value,
     'border-red-500 dark:border-red-500': isInvalid.value,
-    'border-blue-300 dark:border-blue-400': isActive.value && !isInvalid.value,
-    'hover:border-gray-300 dark:hover:border-gray-700':
+    'border-blue-300 dark:border-gray-600': isActive.value && !isInvalid.value,
+    'hover:border-gray-300 dark:hover:border-gray-600':
       isHover.value && !isActive.value && !props.disabled,
     'shadow-inner': !props.noShadow && !props.disabled,
   }));

@@ -190,6 +190,6 @@ function toggleModal(): void {
 }
 
 .selected {
-  @apply bg-gray-50 dark:bg-gray-700 text-black dark:text-white;
+  @apply bg-gray-50 dark:bg-gray-650 text-black dark:text-white;
 }
 </style>

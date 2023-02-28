@@ -10,7 +10,7 @@
         {{ loadingLabel }}
       </span>
     </div>
-    <div v-else class="content">
+    <div v-else class="content" :class="{ center: center }">
       <span v-if="label">
         {{ label }}
       </span>
@@ -68,6 +68,7 @@ export default defineComponent({
     loading: { type: Boolean, default: false },
     loadingLabel: { type: String, default: 'loading...' },
     disabled: { type: Boolean, default: false },
+    center: { type: Boolean, default: true },
   },
 
   setup(props) {
@@ -76,7 +77,7 @@ export default defineComponent({
         case 'xs':
           return 'px-2 h-6 text-xs';
         case 'sm':
-          return 'px-3 h-9 text-base';
+          return 'px-1 h-9 text-base';
         case 'lg':
           return 'px-5 h-18 text-lg md:text-2xl';
         default:
@@ -114,7 +115,7 @@ export default defineComponent({
       }
 
       if (props.disabled) {
-        return `bg-gray-300 dark:bg-gray-700 text-white dark:text-gray-500`;
+        return `bg-gray-300 dark:bg-gray-700 text-white dark:text-gray-600`;
       }
       if (props.loading) {
         return `bg-gradient-to-tr from-${fromColor}-400 to-${toColor}-400`;
@@ -136,8 +137,14 @@ export default defineComponent({
       if (props.color.includes('gradient')) return bgGradientClasses.value;
       else if (props.outline) return 'bg-transparent';
       else if (props.flat) return bgFlatClasses.value;
-      else if (props.color === 'white') {
-        return 'bg-gray-50 hover:bg-white dark:bg-gray-800';
+      else if (props.color === 'red') {
+        return 'bg-red-900 dark:bg-red-900';
+      } else if (props.color === 'gray') {
+        return 'bg-gray-650 dark:bg-gray-650';
+      } else if (props.color === 'white') {
+        return 'bg-gray-50 hover:bg-gray-650 dark:bg-gray-650';
+      } else if (props.color === 'transparent') {
+        return 'bg-transparent dark:bg-transparent';
       } else {
         if (props.disabled) {
           return `bg-gray-300 dark:bg-gray-700 text-white dark:text-gray-500`;
@@ -156,20 +163,22 @@ export default defineComponent({
     const borderClasses = computed(() => {
       if (props.outline) {
         if (props.disabled)
-          return `border border-gray-200 dark:border-gray-700`;
-        return `border border-${props.color}-200 dark:border-${props.color}-700 dark:hover:border-${props.color}-600 dark:focus:border-${props.color}-600 hover:text-gray-600 dark:hover:text-gray-200 dark:focus:text-gray-200`;
+          return `border border-1 border-gray-650 dark:border-gray-650`;
+        if (props.color === 'white')
+          return `border border-1 dark:border-white border-black`;
+        return `border border-${props.color}-200 dark:border-${props.color}-650 dark:hover:border-${props.color}-600 dark:focus:border-${props.color}-600 hover:text-gray-600 dark:hover:text-gray-200 dark:focus:text-gray-200`;
       }
       return 'border-none';
     });
 
     const textColorClasses = computed(() => {
       if (props.outline && props.disabled)
-        return 'text-gray-400 dark:text-gray-700';
+        return 'text-gray-400 dark:text-gray-600';
       if (props.outline && props.color === 'gradient') return 'text-purple-700';
       if (props.color === 'white') {
         if (props.outline)
-          return 'text-white hover:text-yellow-500 dark:hover:text-yellow-500';
-        else return 'text-gray-800 hover:text-blue-600 dark:text-gray-100';
+          return 'text-white hover:text-red-900 dark:hover:text-red-900';
+        else return 'text-gray-800 hover:text-white dark:text-white';
       }
       if (props.outline || props.flat)
         return `text-${props.color}-500 dark:text-${props.color}-400`;
@@ -228,12 +237,16 @@ export default defineComponent({
 
 <style scoped>
 .bal-btn {
-  @apply overflow-hidden tracking-tight;
+  @apply uppercase overflow-hidden tracking-tight;
 
+  font-weight: 700;
+  font-size: 12px;
   font-variation-settings: 'wght' 500;
   transition: all 0.2s ease;
   text-decoration: none !important;
   line-height: 0;
+  width: 100%;
+  border-radius: 4px;
 }
 
 .bal-btn:focus,
@@ -242,6 +255,10 @@ export default defineComponent({
 }
 
 .content {
-  @apply flex justify-center items-center w-full h-full;
+  @apply flex items-center w-full h-full;
+}
+
+.center {
+  @apply justify-center;
 }
 </style>

@@ -22,7 +22,7 @@ const isModalOpen = ref<boolean>(false);
       </div>
 
       <BalBtn
-        color="gradient"
+        color="red"
         class="flex-shrink-0"
         size="sm"
         @click="isModalOpen = true"

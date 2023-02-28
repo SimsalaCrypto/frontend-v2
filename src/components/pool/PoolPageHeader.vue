@@ -131,23 +131,39 @@ const hasMetadata = computed((): boolean => !!poolMetadata.value);
 </script>
 
 <template>
-  <div class="col-span-2 px-4 lg:px-0">
+  <div class="pl-5 lg:pl-20 mt-10">
     <BalLoadingBlock v-if="loadingPool || !pool" class="header-loading-block" />
     <div v-else class="flex flex-col">
-      <div class="flex flex-wrap items-center -mt-2">
-        <div v-if="hasMetadata">
-          <h3 class="pool-title">
-            {{ poolMetadata.name }}
-          </h3>
-          <h5 class="text-sm">
-            {{ poolTypeLabel }}
-          </h5>
+      <div class="">
+        <!-- {{ poolMetadata.name }} -->
+        <div class="breadcrumbs">Invest > {{ poolTypeLabel }}</div>
+
+        <div class="flex items-center">
+          <div class="flex">
+            <template
+              v-for="({ address, symbol, weight }, i) in titleTokens"
+              :key="i"
+            >
+              <div class="token-icon">
+                <BalAsset :size="30" :address="address" />
+              </div>
+
+              <!-- <div class="token-icon">
+              <BalAsset :size="30" :address="titleTokens[1][0]" />
+            </div> -->
+            </template>
+            <div>
+              <template v-for="({ symbol }, i) in titleTokens" :key="i">
+                {{ symbol }}
+                <template v-if="i !== titleTokens.length - 1">/&nbsp;</template>
+              </template>
+            </div>
+            <!-- {{ titleTokens[0].symbol }} / {{ titleTokens[1].symbol }} /
+              {{ titleTokens[2].symbol }} -->
+          </div>
         </div>
-        <h3 v-else class="pool-title">
-          {{ poolTypeLabel }}
-        </h3>
       </div>
-      <div class="flex">
+      <!-- <div class="flex">
         <div
           v-for="({ address, symbol, weight }, i) in titleTokens"
           :key="i"
@@ -188,7 +204,7 @@ const hasMetadata = computed((): boolean => !!poolMetadata.value);
             class="mt-2 ml-2 text-gray-500 hover:text-blue-500 transition-colors"
           />
         </BalLink>
-      </div>
+      </div> -->
       <div class="flex items-center mt-2">
         <div class="mr-1 text-sm text-secondary" v-html="poolFeeLabel" />
         <BalTooltip>
@@ -290,13 +306,40 @@ const hasMetadata = computed((): boolean => !!poolMetadata.value);
   </div>
 </template>
 <style scoped>
+.token-icon {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  @apply flex justify-center items-center;
+}
+
+.token-icon:nth-child(1) {
+  background: black;
+  z-index: 2;
+}
+
+.token-icon:nth-child(2) {
+  position: relative;
+  left: -10px;
+  z-index: 1;
+}
+
+.token-icon:nth-child(3) {
+  position: relative;
+  left: -20px;
+  z-index: 0;
+}
+
+.breadcrumbs {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 24px;
+  @apply text-red-900 mb-2;
+}
+
 .pool-title {
   @apply mr-4 capitalize mt-2;
 
   font-variation-settings: 'wght' 700;
-}
-
-.header-loading-block {
-  height: 6.75rem;
 }
 </style>

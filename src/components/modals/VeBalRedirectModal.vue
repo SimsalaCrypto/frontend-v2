@@ -47,7 +47,7 @@ function handleInternalClose() {
         <BalBtn
           tag="a"
           :label="$t('proceed')"
-          color="gradient"
+          color="red"
           @click="
             router.push({
               name: 'vebal',

@@ -180,7 +180,7 @@ async function handleActionSuccess() {
                 </BalStack>
                 <BalStack horizontal spacing="sm" class="mt-2">
                   <BalBtn
-                    color="gradient"
+                    color="red"
                     size="sm"
                     :disabled="
                       fiatValueOfUnstakedShares === '0' ||

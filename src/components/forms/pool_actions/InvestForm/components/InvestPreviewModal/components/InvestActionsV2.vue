@@ -166,7 +166,7 @@ async function submit(): Promise<TransactionResponse> {
         v-if="lockablePoolId === pool.id"
         tag="router-link"
         :to="{ name: 'get-vebal' }"
-        color="gradient"
+        color="red"
         block
         class="flex mt-2"
       >
@@ -174,7 +174,7 @@ async function submit(): Promise<TransactionResponse> {
       </BalBtn>
       <BalBtn
         v-else-if="isStakablePool"
-        color="gradient"
+        color="red"
         block
         class="flex mt-2"
         @click="emit('showStakeModal')"

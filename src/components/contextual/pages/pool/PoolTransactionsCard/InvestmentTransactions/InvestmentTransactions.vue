@@ -75,7 +75,6 @@ const title = computed((): string => {
 <template>
   <div>
     <div>
-      <h4 class="px-4 lg:px-0 mb-5" v-text="title" />
       <div
         class="flex justify-between items-end mx-4 lg:mx-0 mb-6 border-b dark:border-gray-900"
       >

@@ -40,7 +40,7 @@ export default defineComponent({
     noPad: { type: Boolean, default: false },
     noContentPad: { type: Boolean, default: false },
     noBorder: { type: Boolean, default: false },
-    darkBgColor: { type: String, default: '850' },
+    darkBgColor: { type: String, default: '800' },
     imgSrc: { type: String, default: '' },
     hFull: { type: Boolean, default: false },
     growContent: { type: Boolean, default: false },
@@ -68,7 +68,7 @@ export default defineComponent({
 
   setup(props) {
     const borderClasses = computed(() => {
-      return 'border dark:border-gray-900';
+      return 'border dark:border-gray-900 border-transparent';
     });
 
     const cardClasses = computed(() => {
@@ -76,7 +76,8 @@ export default defineComponent({
         'rounded-lg': !props.square,
         'overflow-hidden': !props.exposeOverflow,
         [`bg-white dark:bg-gray-${props.darkBgColor}`]: true,
-        [`shadow${props.shadow ? '-' : ''}${props.shadow}`]: true,
+        [`shadow${props.shadow ? '-' : ''}${props.shadow}`]:
+          props.shadow !== 'none',
         [borderClasses.value]: !props.noBorder,
         'h-full': props.hFull,
       };
@@ -130,7 +131,7 @@ export default defineComponent({
 }
 
 .card-container {
-  @apply flex flex-col;
+  @apply flex flex-col p-4;
 }
 
 .card-container::-webkit-scrollbar {
@@ -138,6 +139,7 @@ export default defineComponent({
 }
 
 .header {
+  padding: 0 !important;
   @apply flex items-center;
 }
 

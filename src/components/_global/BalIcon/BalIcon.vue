@@ -11,6 +11,7 @@ type Props = {
   name: string;
   size?: IconSize;
   filled?: boolean;
+  stroke?: string;
 };
 
 /**
@@ -19,6 +20,7 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   size: 'md',
   filled: false,
+  stroke: undefined,
 });
 
 /**
@@ -51,6 +53,12 @@ onMounted(() => feather.replace());
 
 <template>
   <div class="inline-block bal-icon">
-    <i :data-feather="name" :width="iconSize" :height="iconSize" :fill="fill" />
+    <i
+      :data-feather="name"
+      :width="iconSize"
+      :height="iconSize"
+      :fill="fill"
+      :stroke="stroke"
+    />
   </div>
 </template>

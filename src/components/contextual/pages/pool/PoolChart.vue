@@ -13,6 +13,7 @@ import useTailwind from '@/composables/useTailwind';
 import { HistoricalPrices } from '@/services/coingecko/api/price.service';
 import { PoolSnapshot, PoolSnapshots, PoolType } from '@/services/pool/types';
 import { twentyFourHoursInSecs } from '@/composables/useTime';
+import { useStore } from 'vuex';
 
 /**
  * TYPES
@@ -71,6 +72,7 @@ const tailwind = useTailwind();
 const { fNum2 } = useNumbers();
 const { isMobile } = useBreakpoints();
 const { darkMode } = useDarkMode();
+const store = useStore();
 
 /**
  * STATE
@@ -100,6 +102,8 @@ const isFocusedOnChart = ref(false);
 /**
  * COMPUTED
  */
+const appLoading = computed(() => store.state.app.loading);
+
 const snapshotValues = computed(() => Object.values(props.snapshots || []));
 
 const periodOptions = computed(() => [
@@ -203,8 +207,8 @@ function getTVLData(periodSnapshots: PoolSnapshot[]) {
   }
 
   return {
-    color: [tailwind.theme.colors.blue['600']],
-    hoverBorderColor: tailwind.theme.colors.pink['500'],
+    color: [tailwind.theme.colors.red['1000']],
+    hoverBorderColor: tailwind.theme.colors.white,
     hoverColor: darkMode.value
       ? tailwind.theme.colors.gray['900']
       : tailwind.theme.colors.white,
@@ -212,7 +216,7 @@ function getTVLData(periodSnapshots: PoolSnapshot[]) {
       color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
         {
           offset: 0,
-          color: 'rgba(14, 165, 233, 0.08)',
+          color: 'rgba(14, 165, 233, 0)',
         },
         {
           offset: 1,
@@ -273,9 +277,9 @@ function getFeesData(
       : Number(periodSnapshots[pariodLastSnapshotIdx].swapFees));
 
   return {
-    color: [tailwind.theme.colors.yellow['400']],
+    color: [tailwind.theme.colors.red['1000']],
     chartType: 'bar',
-    hoverColor: tailwind.theme.colors.pink['500'],
+    hoverColor: tailwind.theme.colors.white,
     data: [
       {
         name: 'Fees',
@@ -323,9 +327,9 @@ function getVolumeData(
       : Number(periodSnapshots[pariodLastSnapshotIdx].swapVolume));
 
   return {
-    color: [tailwind.theme.colors.green['400']],
+    color: [tailwind.theme.colors.red['1000']],
     chartType: 'bar',
-    hoverColor: tailwind.theme.colors.pink['500'],
+    hoverColor: tailwind.theme.colors.white,
     data: [
       {
         name: 'Volume',
@@ -423,21 +427,20 @@ function addLaggingTimestamps() {
 </script>
 
 <template>
-  <BalLoadingBlock v-if="loading" class="chart-loading-block" />
+  <BalLoadingBlock v-if="loading || appLoading" class="chart-loading-block" />
 
   <div v-else-if="snapshotValues.length >= MIN_CHART_VALUES" class="chart">
     <div
       class="flex flex-col xs:flex-row xs:flex-wrap justify-between mb-6 dark:border-gray-900"
     >
-      <div class="flex mb-4">
-        <BalTabs v-model="activeTab" :tabs="tabs" noPad class="mr-6 -mb-px" />
-        <div class="flex items-center">
-          <PoolChartPeriodSelect
-            :options="periodOptions"
-            :activeOption="currentPeriod"
-            @change-option="setCurrentPeriod"
-          />
-        </div>
+      <div class="flex">
+        <BalTabs
+          v-model="activeTab"
+          :tabs="tabs"
+          noPad
+          darkBgColor="900"
+          class="mr-6 -mb-px"
+        />
       </div>
       <div
         class="flex flex-col items-start xs:items-end text-2xl font-semibold tabular-nums"
@@ -492,6 +495,14 @@ function addLaggingTimestamps() {
     <BalIcon name="bar-chart" />
     {{ $t('insufficientData') }}
   </BalBlankSlate>
+
+  <div class="flex items-center">
+    <PoolChartPeriodSelect
+      :options="periodOptions"
+      :activeOption="currentPeriod"
+      @change-option="setCurrentPeriod"
+    />
+  </div>
 </template>
 
 <style scoped>
@@ -500,6 +511,6 @@ function addLaggingTimestamps() {
 }
 
 .chart {
-  @apply sm:border rounded-xl sm:px-5 sm:pt-5 sm:shadow sm:dark:bg-gray-850 dark:border-transparent;
+  @apply border border-gray-650 rounded dark:bg-gray-800 sm:px-5 sm:pt-5 sm:shadow;
 }
 </style>

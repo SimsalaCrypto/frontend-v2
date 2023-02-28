@@ -3,9 +3,9 @@
     <template #activator>
       <BalBtn
         circle
-        color="white"
+        color="transparent"
         size="sm"
-        class="mb-2 text-secondary icon-spin-anim"
+        class="mb-2 bg-transparent dark:bg-transparent text-secondary icon-spin-anim"
         @click="onActivatorClick"
       >
         <BalIcon name="settings" size="sm" />

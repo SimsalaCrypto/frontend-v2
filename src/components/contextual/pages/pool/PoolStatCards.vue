@@ -78,22 +78,54 @@ const stats = computed(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+  <div class="flex flex-col justify-between h-full">
     <template v-for="stat in stats" :key="stat.id">
       <BalLoadingBlock v-if="stat.loading || !pool" class="h-24" />
-      <BalCard v-else>
-        <div class="flex mb-2 text-sm font-medium text-secondary">
+      <BalCard
+        v-else
+        darkBgColor="900"
+        class="bg-transparent dark:bg-transparent pool-stat-card"
+      >
+        <div class="flex mb-2 text-sm font-medium uppercase text-secondary">
           <span>{{ stat.label }}</span>
           <APRTooltip
             v-if="stat.id === 'apr' && poolApr"
             :pool="pool"
             :poolApr="poolApr"
+            hideIcon
           />
         </div>
-        <div class="flex items-center text-xl font-medium">
-          {{ stat.value }}
-        </div>
+
+        <p class="value">
+          <span v-if="stat.value[0] === '$'" class="money">$</span
+          >{{ stat.value[0] === '$' ? stat.value.slice(1) : stat.value }}
+        </p>
       </BalCard>
+      <div class="pool-stat-divider" />
     </template>
   </div>
 </template>
+
+<style scoped>
+.money {
+  vertical-align: text-top;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pool-stat-card {
+  /* background: */
+}
+
+.pool-stat-divider {
+  height: 1px;
+  background-color: #23262f;
+
+  /* border-bottom: 1px solid #23262f; */
+}
+</style>
